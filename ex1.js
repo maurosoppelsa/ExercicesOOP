@@ -24,7 +24,7 @@ function Vehicle(){
 
 }
 
-function Propultion(wheelRad){
+function Propultion(wheelRad,finNumber,spin_dir){
 
 var wheels = new Wheels(wheelRad);
 
@@ -32,7 +32,8 @@ this.afterburner=false;
 this.wheelRd=wheelRad;
 this.wheelsProp = wheels.perimeter;
 this.nozzles;
-this.propellers;
+var ac_propellers = new Propellers(finNumber,spin_dir);
+this.propellers = ac_propellers.getAcelResult();
 this.Finalpropultion;
 this.addPropultion = function(nozzles,propellers){
 
@@ -50,6 +51,31 @@ function Wheels(radius){
 
 }
 
+function Propellers(finNumber,spinDirection){
+
+  var prop_acelerate;
+  this.getAcelResult = function(){
+
+    if(spinDirection){
+
+      prop_acelerate = finNumber ;
+
+      alert("the propelers are acelerating by " + finNumber);
+
+      return prop_acelerate;
+
+    }else{
+
+    prop_acelerate = (finNumber)*-1;
+
+    alert("the propelers are decelerating by " + finNumber);
+
+    return prop_acelerate;
+
+    }
+  };
+}
+
 var vehicle1 = new Vehicle();
 vehicle1.speed=100;
 vehicle1.model="Camaro";
@@ -62,16 +88,14 @@ vehicle2.model="Ferrari";
 alert('Vehicle: ' + vehicle1.model + " Speed: " + vehicle1.speed);
 alert('Vehicle: ' + vehicle2.model + " Speed: " + vehicle2.speed);
 
-var propultion1 = new Propultion(10);
+var propultion1 = new Propultion(10,15,true);
 propultion1.nozzles=30;
-propultion1.propellers=10;
 propultion1.addPropultion(propultion1.nozzles,propultion1.propellers);
 
 vehicle1.acelerate(propultion1);
 
-var propultion2 = new Propultion(15);
+var propultion2 = new Propultion(15,20,false);
 propultion2.nozzles=30;
-propultion2.propellers=20;
 propultion2.addPropultion(propultion2.nozzles,propultion2.propellers);
 
 vehicle2.acelerate(propultion2);
