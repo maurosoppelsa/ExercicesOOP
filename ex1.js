@@ -60,7 +60,7 @@ function Propellers(finNumber,spinDirection){
 
       prop_acelerate = finNumber ;
 
-      alert("the propelers are acelerating by " + finNumber);
+      alert("the propellers are acelerating by " + finNumber + " in the vehicle");
 
       return prop_acelerate;
 
@@ -68,7 +68,7 @@ function Propellers(finNumber,spinDirection){
 
     prop_acelerate = (finNumber)*-1;
 
-    alert("the propelers are decelerating by " + finNumber);
+    alert("the propellers are decelerating by " + finNumber + " in the vehicle");
 
     return prop_acelerate;
 
@@ -86,13 +86,14 @@ vehicle2.model="Ferrari";
 
 
 alert('Vehicle: ' + vehicle1.model + " Speed: " + vehicle1.speed);
-alert('Vehicle: ' + vehicle2.model + " Speed: " + vehicle2.speed);
 
 var propultion1 = new Propultion(10,15,true);
 propultion1.nozzles=30;
 propultion1.addPropultion(propultion1.nozzles,propultion1.propellers);
 
 vehicle1.acelerate(propultion1);
+
+alert('Vehicle: ' + vehicle2.model + " Speed: " + vehicle2.speed);
 
 var propultion2 = new Propultion(15,20,false);
 propultion2.nozzles=30;
