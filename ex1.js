@@ -8,11 +8,15 @@ switch(type_of_vehicle){
 
 case "land":
 
-var land = new Land(10,10,10,10);
+alert("--Land Vehicle--");
+
+var frontWheels = parseInt(prompt("Enter the radius for the front wheels"));
+var backWheelies = parseInt(prompt("Enter the radius for the back Wheelies"));
+
+var land = new Land(frontWheels,frontWheels,backWheelies,backWheelies);
 
 this.speed += land.acel_wheels;
 
-alert("--Land Vehicle--");
 alert("Final Speed: " + Math.trunc(this.speed));
 
 break;
@@ -36,6 +40,48 @@ break;
 case "air":
 
 var air = new Air();
+
+var air_aceleration = air.getAceleration();
+
+alert("The aceleration is " + air_aceleration);
+
+this.speed+= air_aceleration;
+
+alert("Final speed: " + this.speed);
+
+break;
+
+case "amphibious":
+
+var type =prompt("select the type of movement\n1- Water\n2- Land");
+
+if(type==1){
+
+  var water = new Water();
+
+  water.get_propellers();
+
+  water.getProper_data();
+
+  this.speed += water.final_acel;
+
+  alert("Final speed: " + this.speed);
+
+}else if(type==2){
+
+  var frontWheels = parseInt(prompt("Enter the radius for the front wheels"));
+  var backWheelies = parseInt(prompt("Enter the radius for the back Wheelies"));
+
+  var land = new Land(frontWheels,frontWheels,backWheelies,backWheelies);
+
+  this.speed += land.acel_wheels;
+
+  alert("Final Speed: " + Math.trunc(this.speed));
+
+
+}else{
+  alert("You can only select between 1 or 2");
+}
 
 break;
 
@@ -79,30 +125,20 @@ var prop_num = prompt("enter the number of propellers");
 
 var prop_number = parseInt(prop_num);
 
-var prop_direction,direction,q_fin,fin_quant,bool_dir=false;
+var prop_direction,direction,q_fin,fin_quant;
 
 
 for(var i=0;i<prop_number;i++){
 
-prop_direction = prompt("Enter the direction:\n1 - clockwise\n2 - anticlockwise");
+alert("--Propeller " + (i+1) + "--");
 
-direction = parseInt(prop_direction);
+prop_direction = prompt("Enter the direction:\n1 - clockwise\n2 - anticlockwise");
 
 q_fin = prompt("Enter the numbers of the fins");
 
 fin_quant = parseInt(q_fin);
 
-if(prop_direction=1){
-
-bool_dir = true;
-
-}else if(direction=2){
-
-bool_dir = false;
-
-}
-
-this.add_new_propeller = prop.addPropeller(fin_quant,bool_dir);
+this.add_new_propeller = prop.addPropeller(fin_quant,prop_direction);
 
 }
 
@@ -115,7 +151,7 @@ this.getProper_data = function(){
 
 for(var i=0;i<prop.prop_content.length;i++){
 
-if(prop.prop_content[i].direction=true){
+if(prop.prop_content[i].direction){
 
 this.get_dir="clockwise";
 
@@ -124,10 +160,10 @@ this.get_dir="clockwise";
 this.get_dir = "anticlockwise";
 
 }
+alert("--Propeler " + (i+1)+"--");
+alert("direction: " + this.get_dir + " numbers of fins: " + prop.prop_content[i].fin_num);
 
-alert("Propeller added:" + " direction: " + this.get_dir + " numbers of fins: " + prop.prop_content[i].fin_num);
-
-this.final_acel = prop.prop_content[i].getAcelResult();
+this.final_acel += prop.prop_content[i].getAcelResult();
 
 alert("Propeller aceleration result: " + this.final_acel);
 
@@ -137,9 +173,26 @@ alert("Propeller aceleration result: " + this.final_acel);
 
 }
 
-function Air(turbo_button){
+function Air(){
 
+alert("--Air Vehicle--");
 
+this.AirAceleration=0;
+
+var prop = new Propultion();
+
+this.getAceleration = function(){
+
+  var power = prompt("Enter the power of the nozlee propeller");
+  var turbo = confirm("Do you want to activate the turbo?");
+
+  prop.addNozzle(power,turbo);
+
+  this.AirAceleration=prop.getNozleePropultion();
+
+return this.AirAceleration;
+
+  };
 
 }
 
@@ -148,15 +201,24 @@ function Propultion(){
 this.Finalpropultion;
 this.wheels;
 this.propellers;
-this.nozlees;
+this.spin_dir=false;
 
 this.prop_content= [];
 this.wheel_content = [];
 this.noz_content = [];
 
-this.addPropeller=function(finNumber,spinDirection){
+this.addPropeller=function(finNumber,num_selection){
 
-var the_propeller = new Propellers(finNumber,spinDirection);
+  if(num_selection==1){
+
+this.spin_dir = true;
+
+  }else{
+    this.spin_dir=false;
+  }
+
+
+var the_propeller = new Propellers(finNumber,this.spin_dir);
 
 this.prop_content.push(the_propeller);
 };
@@ -169,9 +231,19 @@ this.wheel_content.push(the_wheel);
 
 };
 
-this.addNozzle = function(nozlee){
+this.addNozzle = function(power,afterburner){
+
+var nozlee = new Nozzle(power,afterburner);
 
 this.noz_content.push(nozlee);
+
+};
+
+this.getNozleePropultion=function(){
+
+  var propultion = this.noz_content[0].getTurboResult();
+
+  return propultion;
 
 };
 
@@ -199,9 +271,9 @@ function Propellers(finNumber,spinDirection){
   var prop_acelerate;
   this.getAcelResult = function(){
 
-    if(spinDirection=true){
+    if(spinDirection===true){
 
-      prop_acelerate = finNumber ;
+      prop_acelerate = finNumber;
 
       return prop_acelerate;
 
@@ -226,28 +298,26 @@ this.perimeter = 2 * pi * radius;
 
 }
 
-function Nozzle(the_power){
+function Nozzle(the_power,afterburner){
 
-  var power=0;
-  this.afterburner=false;
+  this.power = 0;
   this.getTurboResult= function(){
 
     if(afterburner){
 
-      this.power+=the_power*2;
+      this.power=parseInt(the_power*2);
 
-      return power;
+      return this.power;
 
     }else{
 
-      this.power=the_power;
+      this.power=parseInt(the_power);
 
-      return power;
+      return this.power;
 
     }
   };
 
-
 }
 
-var vehicle = new Vehicle("water",120);
+var vehicle = new Vehicle("amphibious",120);
