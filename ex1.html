@@ -2,12 +2,45 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="ex1.js"></script>
-
-</script>
+<link rel="stylesheet" type="text/css" href="style.css" media="screen"></link>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
-
 <body>
 
+<h1 id="title">Select a vehicle</h1>
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div id="land_select" class="col-xs-6 col-sm-3"><label id="Init_veloc_lnd" class="land_veloc">Initial speed: 100</label>
+    <label id="land_ac" class="land_veloc"></label>
+  <label id="land_fV" class="land_veloc"></label>
+      <img  class="vehicle_img" src="images/land.png"><h4 id="land_title" class="vehicle_titles"></h4></div>
+    <div id="water_select" class="col-xs-6 col-sm-3"><img class="vehicle_img" src="images/water.png"><h4 id="water_title" class="vehicle_titles"></h4></div>
+
+    <div id="air_select" class="col-xs-6 col-sm-3"><img class="vehicle_img" src="images/air.png"><h4 id="air_title" class="vehicle_titles"></h4></div>
+    <div id="amphi_select" class="col-xs-6 col-sm-3"><img  class="vehicle_img" src="images/amphibious.png"><h4 id="amphi_title" class="vehicle_titles"></h4></div>
+  </div>
+
+</div>
+
+<div id="land_form">
+<label>Vehicle Speed</label><input id="land_speed" type="text">
+<label>Radius (Front wheels)</label><input id="fw_rad" type="text">
+<label>Radius (Back Wheelies)</label><input id="bw_rad" type="text">
+<button id="land_start" type="submit" class="btn btn-default"><i class="glyphicon glyphicon-star"></i> Start</button>
+</div>
+
+<div id="water_form">
+<label id="title_input_prop">Propellers:</label><input id="prop_quant" type="text">
+<button id="quant_prop_bt" type="submit" class="btn btn-default"><i class="glyphicon glyphicon-ok"></i> Ok</button>
+
+</div>
+<div id="prueba"></div>
+
+<script src="jquery.js"></script>
+<script src="ex1.js"></script>
+<script src="effects.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

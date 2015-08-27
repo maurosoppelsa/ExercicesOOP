@@ -11,22 +11,30 @@ switch(type_of_vehicle){
 
 case "land":
 
-  alert("--Land Vehicle--");
+  //alert("--Land Vehicle--");
 
-var frontWheels = parseInt(prompt("Enter the radius for the front wheels"));
-var backWheelies = parseInt(prompt("Enter the radius for the back Wheelies"));
+var fw = $("#fw_rad").val();
+var bw = $("#bw_rad").val();
+
+var frontWheels = parseInt(Math.trunc(fw));
+var backWheelies = parseInt(Math.trunc(bw));
 
 var land = new Land(frontWheels,frontWheels,backWheelies,backWheelies);
 
-this.speed += land.acel_wheels;
+$("#Init_veloc_lnd").text("Initial speed: " + this.speed);
 
-  alert("Final Speed: " + Math.trunc(this.speed));
+this.speed += parseInt(land.acel_wheels);
+
+$("#land_ac").text("Aceleration: " + Math.trunc(land.acel_wheels));
+$("#land_fV").text("Final speed: " + this.speed);
+
+  //alert("Final Speed: " + Math.trunc(this.speed));
 
         break;
 
 case "water":
 
-  alert("--Water Vehicle--");
+  //alert("--Water Vehicle--");
 
 var water = new Water();
 
@@ -36,7 +44,7 @@ var water = new Water();
 
 this.speed += water.final_acel;
 
-  alert("Final speed: " + this.speed);
+  //alert("Final speed: " + this.speed);
 
       break;
 
@@ -46,11 +54,11 @@ var air = new Air();
 
 var air_aceleration = air.getAceleration();
 
-alert("The aceleration is " + air_aceleration);
+//alert("The aceleration is " + air_aceleration);
 
 this.speed+= air_aceleration;
 
-alert("Final speed: " + this.speed);
+//alert("Final speed: " + this.speed);
 
     break;
 
@@ -68,7 +76,7 @@ if(type==1){
 
   this.speed += water.final_acel;
 
-  alert("Final speed: " + this.speed);
+  //alert("Final speed: " + this.speed);
 
 }else if(type==2){
 
@@ -79,18 +87,18 @@ if(type==1){
 
   this.speed += land.acel_wheels;
 
-  alert("Final Speed: " + Math.trunc(this.speed));
+  //alert("Final Speed: " + Math.trunc(this.speed));
 
 
 }else{
-  alert("You can only select between 1 or 2");
+  //alert("You can only select between 1 or 2");
     }
 
     break;
 
       default:
 
-      alert("That vehicle doesnt exist!!");
+    //alert("That vehicle doesnt exist!!");
 
       }
 
@@ -133,7 +141,7 @@ function Water(){
 
       for(var i=0;i<prop_number;i++){
 
-          alert("--Propeller " + (i+1) + "--");
+          //alert("--Propeller " + (i+1) + "--");
 
           prop_direction = prompt("Enter the direction:\n1 - clockwise\n2 - anticlockwise");
 
@@ -164,12 +172,12 @@ this.get_dir = "anticlockwise";
 
       }
 
- alert("--Propeler " + (i+1)+"--");
- alert("direction: " + this.get_dir + " numbers of fins: " + prop.prop_content[i].fin_num);
+ //alert("--Propeler " + (i+1)+"--");
+ //alert("direction: " + this.get_dir + " numbers of fins: " + prop.prop_content[i].fin_num);
 
 this.final_acel += prop.prop_content[i].getAcelResult();
 
-alert("Propeller aceleration result: " + this.final_acel);
+//alert("Propeller aceleration result: " + this.final_acel);
 
       }
 
@@ -179,7 +187,7 @@ alert("Propeller aceleration result: " + this.final_acel);
 /*Ait vehicle object*/
 function Air(){
 
-  alert("--Air Vehicle--");
+  //alert("--Air Vehicle--");
 
   this.AirAceleration=0;
 
@@ -323,5 +331,67 @@ function Nozzle(the_power,afterburner){
   };
 
 }
-/*Here you can select or create differents vehicles*/
-var vehicle = new Vehicle("amphibious",120);
+
+$("#land_start").click(function(){
+
+var speed = $("#land_speed").val();
+
+var vehicle = new Vehicle("land",parseInt(speed));
+
+getVelocityData();
+
+});
+
+$("#quant_prop_bt").click(function(){
+
+var propq= parseInt($("#prop_quant").val());
+
+  for(var i=0;i<propq;i++){
+
+$("#water_form").append("<label class='title_rad_prop'>Propeller "+
+(i+1)+":</label><p class='clock_rad_title'>Clockwise</p><input value='cloc' name='clock' id='propq_clock"+
+(i+1)+"' type='radio'><p class='anticlock_rad_title'>Anticlockwise</p><input value='anticloc' name='clock' id='propq_ant"+
+(i+1)+"' type='radio'>");
+
+  }
+
+$("#water_form").append("</br><button class='btn btn-default' id='water_start_bt'><i class='glyphicon glyphicon-star'></i> Start</button>");
+
+setTimeout(function () {
+
+  $("#quant_prop_bt").fadeOut("slow");
+  $("#title_input_prop").fadeOut("slow");
+  $("#water_form input[type='text']").fadeOut("slow");
+
+}, 300);
+
+});
+
+function getVelocityData(){
+
+  $("#Init_veloc_lnd").fadeIn("slow");
+
+  setTimeout(function () {
+
+  $("#Init_veloc_lnd").fadeOut("slow");
+
+  }, 3000);
+
+  setTimeout(function () {
+      $("#land_ac").fadeIn("slow");
+  }, 6000);
+
+ setTimeout(function () {
+
+  $("#land_ac").fadeOut("slow");
+}, 9000);
+
+ setTimeout(function () {
+  $("#land_fV").fadeIn("slow");
+}, 12000);
+
+}
+
+
+
+//var vehicle = new Vehicle("amphibious",120);
