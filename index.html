@@ -20,7 +20,11 @@
     <label id="water_ac" class="water_veloc"></label>
   <label id="water_fV" class="water_veloc"></label><img class="vehicle_img" src="images/water.png"><h4 id="water_title" class="vehicle_titles"></h4></div>
 
-    <div id="air_select" class="col-xs-6 col-sm-3"><img class="vehicle_img" src="images/air.png"><h4 id="air_title" class="vehicle_titles"></h4></div>
+    <div id="air_select" class="col-xs-6 col-sm-3">
+      <label id="air_init_speed" class="air_veloc">Speed:</label>
+      <label id="air_ac_speed" class="air_veloc">Aceleration:</label>
+      <label id="air_final_speed" class="air_veloc">Final speed:</label>
+      <img class="vehicle_img" src="images/air.png"><h4 id="air_title" class="vehicle_titles"></h4></div>
     <div id="amphi_select" class="col-xs-6 col-sm-3"><img  class="vehicle_img" src="images/amphibious.png"><h4 id="amphi_title" class="vehicle_titles"></h4></div>
   </div>
 
@@ -44,6 +48,7 @@
 <label id="title_speed_air">Vehicle Speed:</label><input id="air_speed" type="text">
 <label id="title_pwr_air">Power: </label><input id="air_pw" type="text">
 <label id="title_turbo">Turbo button: </label><button id="turbo_button">OF</button>
+<button id="air_start" type="submit" class="btn btn-default"><i class="glyphicon glyphicon-star"></i> Start</button>
 </div>
 
 <script src="jquery.js"></script>

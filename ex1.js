@@ -54,11 +54,13 @@ var air = new Air();
 
 var air_aceleration = air.getAceleration();
 
-//alert("The aceleration is " + air_aceleration);
+$("#air_init_speed").text("Speed: "+$("#air_speed").val()) ;
+
+$("#air_ac_speed").text("Aceleration: "+ air_aceleration);
 
 this.speed+= air_aceleration;
 
-//alert("Final speed: " + this.speed);
+$("#air_final_speed").text("Final speed: " + this.speed);
 
     break;
 
@@ -204,8 +206,15 @@ function Air(){
 
   this.getAceleration = function(){
 
-    var power = prompt("Enter the power of the nozlee propeller");
-    var turbo = confirm("Do you want to activate the turbo?");
+    var power = parseInt($("#air_pw").val());
+
+    var turbo_txt = $("#turbo_button").text();
+
+    var turbo=false;
+
+    if(turbo_txt=="ON"){
+      turbo = true;
+    }
 
     prop.addNozzle(power,turbo);
 
@@ -362,7 +371,6 @@ getwtVelocityData();
 });
 
 
-
 $("#quant_prop_bt").click(function(){
 
 var propq= parseInt($("#prop_quant").val());
@@ -390,6 +398,23 @@ setTimeout(function () {
 
 });
 
+$("#air_start").click(function(){
+
+var speed = $("#air_speed").val();
+
+var air = new Vehicle("air",parseInt(speed));
+
+getAirVelocityData();
+
+});
+
+$("#turbo_button").click(function(){
+
+    $(this).text("ON");
+
+    $(this).css("border","5px solid red");
+
+});
 
 
 function getlndVelocityData(){
@@ -442,5 +467,29 @@ function getwtVelocityData(){
 
 }
 
+function getAirVelocityData(){
+
+  $("#air_init_speed").fadeIn("slow");
+
+  setTimeout(function () {
+
+  $("#air_init_speed").fadeOut("slow");
+
+  }, 3000);
+
+  setTimeout(function () {
+      $("#air_ac_speed").fadeIn("slow");
+  }, 6000);
+
+ setTimeout(function () {
+
+  $("#air_ac_speed").fadeOut("slow");
+}, 9000);
+
+ setTimeout(function () {
+  $("#air_final_speed").fadeIn("slow");
+}, 12000);
+
+}
 
 //var vehicle = new Vehicle("amphibious",120);
