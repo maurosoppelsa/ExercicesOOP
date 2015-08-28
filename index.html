@@ -12,11 +12,13 @@
 <div class="container-fluid">
 
   <div class="row">
-    <div id="land_select" class="col-xs-6 col-sm-3"><label id="Init_veloc_lnd" class="land_veloc">Initial speed: 100</label>
+    <div id="land_select" class="col-xs-6 col-sm-3"><label id="Init_veloc_lnd" class="land_veloc"></label>
     <label id="land_ac" class="land_veloc"></label>
   <label id="land_fV" class="land_veloc"></label>
       <img  class="vehicle_img" src="images/land.png"><h4 id="land_title" class="vehicle_titles"></h4></div>
-    <div id="water_select" class="col-xs-6 col-sm-3"><img class="vehicle_img" src="images/water.png"><h4 id="water_title" class="vehicle_titles"></h4></div>
+    <div id="water_select" class="col-xs-6 col-sm-3"><label id="Init_veloc_wt" class="water_veloc"></label>
+    <label id="water_ac" class="water_veloc"></label>
+  <label id="water_fV" class="water_veloc"></label><img class="vehicle_img" src="images/water.png"><h4 id="water_title" class="vehicle_titles"></h4></div>
 
     <div id="air_select" class="col-xs-6 col-sm-3"><img class="vehicle_img" src="images/air.png"><h4 id="air_title" class="vehicle_titles"></h4></div>
     <div id="amphi_select" class="col-xs-6 col-sm-3"><img  class="vehicle_img" src="images/amphibious.png"><h4 id="amphi_title" class="vehicle_titles"></h4></div>
@@ -32,11 +34,17 @@
 </div>
 
 <div id="water_form">
+<label id="title_speed_wt">Vehicle Speed:</label><input id="water_speed" type="text">
 <label id="title_input_prop">Propellers:</label><input id="prop_quant" type="text">
 <button id="quant_prop_bt" type="submit" class="btn btn-default"><i class="glyphicon glyphicon-ok"></i> Ok</button>
-
+<button id='water_start_bt' class='btn btn-default' ><i class='glyphicon glyphicon-star'></i> Start</button>
 </div>
-<div id="prueba"></div>
+
+<div id="air_form">
+<label id="title_speed_air">Vehicle Speed:</label><input id="air_speed" type="text">
+<label id="title_pwr_air">Power: </label><input id="air_pw" type="text">
+<label id="title_turbo">Turbo button: </label><button id="turbo_button">OF</button>
+</div>
 
 <script src="jquery.js"></script>
 <script src="ex1.js"></script>

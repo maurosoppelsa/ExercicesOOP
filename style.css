@@ -65,16 +65,7 @@ color: #3B5997;
 #quant_prop_bt{
   margin-left: 5px;
 }
-.clock_rad_title{
-display: inline;
-margin-left: 20px;
-margin-right: 10px;
-}
-.anticlock_rad_title{
-display: inline;
-margin-left: 20px;
-margin-right: 10px;
-}
+
 #water_form{
 display: none;
 }
@@ -86,4 +77,55 @@ display: none;
   margin-top: 20px;
   margin-left: 15px;
   margin-bottom: 20px;
+  display: none;
+}
+.fin_title{
+  display: inline;
+}
+
+.water_veloc{
+  color: #4AE54A;
+  margin-left: 50px;
+  display: none;
+  position: absolute;
+  margin-top: 165px;
+  font-size: 14px;
+}
+.select_dir{
+  width: 105px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+#title_speed_wt{
+  margin-left: 10px;
+}
+#turbo_button{
+width: 70px;
+height: 70px;
+border-radius: 40px;
+background-color: #84B410;
+border:5px solid #DCEAC1;
+font-size: 25px;
+color: #ffffff;
+margin-left: 20px;
+font-weight: bold;
+}
+#air_speed{
+  width: 40px;
+  margin-left: 5px;
+}
+#air_pw{
+  width: 40px;
+  margin-left: 5px;
+}
+#air_form{
+display: none; 
+}
+#air_form input{
+display: block;
+margin-left: 13px;
+margin-bottom: 10px;
+}
+#air_form label{
+  margin-left: 10px
 }

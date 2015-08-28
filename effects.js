@@ -93,6 +93,14 @@ $(document).ready(function(){
     $("#land_select").fadeOut();
   });
 
+$("#air_select").click(function(){
 
+setTimeout(function () {
+
+    $("#air_form").slideDown();
+
+},1000);
+
+});
 
 });

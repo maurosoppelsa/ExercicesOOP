@@ -11,8 +11,6 @@ switch(type_of_vehicle){
 
 case "land":
 
-  //alert("--Land Vehicle--");
-
 var fw = $("#fw_rad").val();
 var bw = $("#bw_rad").val();
 
@@ -28,13 +26,9 @@ this.speed += parseInt(land.acel_wheels);
 $("#land_ac").text("Aceleration: " + Math.trunc(land.acel_wheels));
 $("#land_fV").text("Final speed: " + this.speed);
 
-  //alert("Final Speed: " + Math.trunc(this.speed));
-
         break;
 
 case "water":
-
-  //alert("--Water Vehicle--");
 
 var water = new Water();
 
@@ -42,9 +36,15 @@ var water = new Water();
 
   water.getProper_data();
 
-this.speed += water.final_acel;
+this.speed = parseInt($("#water_speed").val());
 
-  //alert("Final speed: " + this.speed);
+$("#Init_veloc_wt").text("Initial speed: " + this.speed);
+
+this.speed += parseInt(water.final_acel);
+
+$("#water_ac").text("Aceleration: " + water.final_acel);
+
+$("#water_fV").text("Final speed: "+this.speed);
 
       break;
 
@@ -132,20 +132,29 @@ function Water(){
 
   this.get_propellers = function(){
 
-    var prop_num = prompt("enter the number of propellers");
+    var prop_num = $("#prop_quant").val();
 
     var prop_number = parseInt(prop_num);
 
     var prop_direction,direction,q_fin,fin_quant;
 
+    var id_select;
 
       for(var i=0;i<prop_number;i++){
 
-          //alert("--Propeller " + (i+1) + "--");
+          id_select = "#direction"+(i+1);
 
-          prop_direction = prompt("Enter the direction:\n1 - clockwise\n2 - anticlockwise");
+          direction = $(id_select).val();
 
-          q_fin = prompt("Enter the numbers of the fins");
+        if(direction == "Clockwise"){
+          prop_direction = 1;
+        }
+
+        if(direction == "Anticlockwise"){
+          prop_direction = 2;
+        }
+
+          q_fin = $(("#fin_num"+(i+1))).val();
 
           fin_quant = parseInt(q_fin);
 
@@ -338,9 +347,21 @@ var speed = $("#land_speed").val();
 
 var vehicle = new Vehicle("land",parseInt(speed));
 
-getVelocityData();
+getlndVelocityData();
 
 });
+
+$("#water_start_bt").click(function(){
+
+var speed = $("#water_speed").val();
+
+var water = new Vehicle("water",parseInt(speed));
+
+getwtVelocityData();
+
+});
+
+
 
 $("#quant_prop_bt").click(function(){
 
@@ -349,25 +370,29 @@ var propq= parseInt($("#prop_quant").val());
   for(var i=0;i<propq;i++){
 
 $("#water_form").append("<label class='title_rad_prop'>Propeller "+
-(i+1)+":</label><p class='clock_rad_title'>Clockwise</p><input value='cloc' name='clock' id='propq_clock"+
-(i+1)+"' type='radio'><p class='anticlock_rad_title'>Anticlockwise</p><input value='anticloc' name='clock' id='propq_ant"+
-(i+1)+"' type='radio'>");
+(i+1)+":</label><select class='select_dir' id='direction"+(i+1)+"'><optgroup><option>Clockwise</option><option>Anticlockwise</option></optgroup></select>");
+
+$("#water_form").append("<p class='fin_title'>Fin number: </p><input type='text' id='fin_num"+(i+1)+"'>");
+
+$("#water_start_bt").fadeIn("slow");
 
   }
 
-$("#water_form").append("</br><button class='btn btn-default' id='water_start_bt'><i class='glyphicon glyphicon-star'></i> Start</button>");
+//$("#water_form").append("</br><button class='btn btn-default' id='water_start_bt'><i class='glyphicon glyphicon-star'></i> Start</button>");
 
 setTimeout(function () {
 
   $("#quant_prop_bt").fadeOut("slow");
   $("#title_input_prop").fadeOut("slow");
-  $("#water_form input[type='text']").fadeOut("slow");
+  $("#prop_quant").fadeOut("slow");
 
 }, 300);
 
 });
 
-function getVelocityData(){
+
+
+function getlndVelocityData(){
 
   $("#Init_veloc_lnd").fadeIn("slow");
 
@@ -392,6 +417,30 @@ function getVelocityData(){
 
 }
 
+function getwtVelocityData(){
+
+  $("#Init_veloc_wt").fadeIn("slow");
+
+  setTimeout(function () {
+
+  $("#Init_veloc_wt").fadeOut("slow");
+
+  }, 3000);
+
+  setTimeout(function () {
+      $("#water_ac").fadeIn("slow");
+  }, 6000);
+
+ setTimeout(function () {
+
+  $("#water_ac").fadeOut("slow");
+}, 9000);
+
+ setTimeout(function () {
+  $("#water_fV").fadeIn("slow");
+}, 12000);
+
+}
 
 
 //var vehicle = new Vehicle("amphibious",120);
