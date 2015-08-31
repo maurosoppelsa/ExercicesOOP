@@ -64,43 +64,7 @@ $("#air_final_speed").text("Final speed: " + this.speed);
 
     break;
 
-case "amphibious":
-
-var type =prompt("select the type of movement\n1- Water\n2- Land");
-
-if(type==1){
-
-  var water = new Water();
-
-  water.get_propellers();
-
-  water.getProper_data();
-
-  this.speed += water.final_acel;
-
-  //alert("Final speed: " + this.speed);
-
-}else if(type==2){
-
-  var frontWheels = parseInt(prompt("Enter the radius for the front wheels"));
-  var backWheelies = parseInt(prompt("Enter the radius for the back Wheelies"));
-
-  var land = new Land(frontWheels,frontWheels,backWheelies,backWheelies);
-
-  this.speed += land.acel_wheels;
-
-  //alert("Final Speed: " + Math.trunc(this.speed));
-
-
-}else{
-  //alert("You can only select between 1 or 2");
-    }
-
-    break;
-
       default:
-
-    //alert("That vehicle doesnt exist!!");
 
       }
 
@@ -356,7 +320,13 @@ var speed = $("#land_speed").val();
 
 var vehicle = new Vehicle("land",parseInt(speed));
 
+$("#canvas_box").show();
+
 getlndVelocityData();
+
+var url='images/road.png';
+
+getCanvas(url);
 
 });
 
@@ -366,7 +336,15 @@ var speed = $("#water_speed").val();
 
 var water = new Vehicle("water",parseInt(speed));
 
+$("#img_icon").attr("src","images/boat_icon.png");
+
+$("#canvas_box").show();
+
 getwtVelocityData();
+
+var url = 'images/sea.png';
+
+getCanvas(url);
 
 });
 
@@ -400,11 +378,19 @@ setTimeout(function () {
 
 $("#air_start").click(function(){
 
+$("#img_icon").attr("src","images/airplane_icon.png");
+
 var speed = $("#air_speed").val();
 
 var air = new Vehicle("air",parseInt(speed));
 
+$("#canvas_box").show();
+
 getAirVelocityData();
+
+var url = 'images/sky.png';
+
+getCanvas(url);
 
 });
 
@@ -413,6 +399,32 @@ $("#turbo_button").click(function(){
     $(this).text("ON");
 
     $(this).css("border","5px solid red");
+
+});
+
+$("#type_move_bt").click(function(){
+
+var type = $("#amphi_move_select").val();
+
+if(type=="Water"){
+
+  $("#land_select").hide();
+  $("#amphi_select").remove();
+  $("#wtr_img").attr("src","images/amp.jpg");
+  $("#water_select").fadeIn();
+  $("#land_form").slideUp();
+  $("#water_form").slideDown();
+
+}else if (type=="Land") {
+
+  $("#water_select").hide();
+  $("#amphi_select").remove();
+  $("#lnd_img").attr("src","images/amp.jpg");
+  $("#land_select").fadeIn();
+  $("#water_form").slideUp();
+  $("#land_form").slideDown();
+
+}
 
 });
 
@@ -492,4 +504,64 @@ function getAirVelocityData(){
 
 }
 
-//var vehicle = new Vehicle("amphibious",120);
+function getCanvas(url){
+  var img = new Image();
+
+  // User Variables - customize these to change the image being scrolled, its
+  // direction, and the speed.
+
+  img.src = url;
+  var CanvasXSize = 800;
+  var CanvasYSize = 200;
+  var speed = 30; //lower is faster
+  var scale = 1.05;
+  var y = -4.5; //vertical offset
+
+  // Main program
+
+  var dx = 0.75;
+  var imgW;
+  var imgH;
+  var x = 0;
+  var clearX;
+  var clearY;
+  var ctx;
+
+  img.onload = function() {
+      imgW = img.width*scale;
+      imgH = img.height*scale;
+      if (imgW > CanvasXSize) { x = CanvasXSize-imgW; } // image larger than canvas
+      if (imgW > CanvasXSize) { clearX = imgW; } // image larger than canvas
+      else { clearX = CanvasXSize; }
+      if (imgH > CanvasYSize) { clearY = imgH; } // image larger than canvas
+      else { clearY = CanvasYSize; }
+      //Get Canvas Element
+      ctx = document.getElementById('the_canvas').getContext('2d');
+      //Set Refresh Rate
+      return setInterval(draw, speed);
+  }
+
+  function draw() {
+      //Clear Canvas
+      ctx.clearRect(0,0,clearX,clearY);
+      //If image is <= Canvas Size
+      if (imgW <= CanvasXSize) {
+          //reset, start from beginning
+          if (x > (CanvasXSize)) { x = 0; }
+          //draw aditional image
+          if (x > (CanvasXSize-imgW)) { ctx.drawImage(img,x-CanvasXSize+1,y,imgW,imgH); }
+      }
+      //If image is > Canvas Size
+      else {
+          //reset, start from beginning
+          if (x > (CanvasXSize)) { x = CanvasXSize-imgW; }
+          //draw aditional image
+          if (x > (CanvasXSize-imgW)) { ctx.drawImage(img,x-imgW+1,y,imgW,imgH); }
+      }
+      //draw image
+      ctx.drawImage(img,x,y,imgW,imgH);
+      //amount to move
+      x += dx;
+  }
+
+}

@@ -4,56 +4,71 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="style.css" media="screen"></link>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href='https://fonts.googleapis.com/css?family=Exo:400,500' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
-<h1 id="title">Select a vehicle</h1>
+<div id="box_return"><a id="return_bt" href="index.html"><i class="glyphicon glyphicon-home"></i></a></div>
+<h2 id="title"><i class="glyphicon glyphicon-flag"></i> Select a vehicle</h2>
 
 <div class="container-fluid">
-
   <div class="row">
     <div id="land_select" class="col-xs-6 col-sm-3"><label id="Init_veloc_lnd" class="land_veloc"></label>
     <label id="land_ac" class="land_veloc"></label>
   <label id="land_fV" class="land_veloc"></label>
-      <img  class="vehicle_img" src="images/land.png"><h4 id="land_title" class="vehicle_titles"></h4></div>
+    <img id="lnd_img" class="vehicle_img" src="images/car.png"><h2 id="land_title" class="vehicle_titles"></h2></div>
     <div id="water_select" class="col-xs-6 col-sm-3"><label id="Init_veloc_wt" class="water_veloc"></label>
     <label id="water_ac" class="water_veloc"></label>
-  <label id="water_fV" class="water_veloc"></label><img class="vehicle_img" src="images/water.png"><h4 id="water_title" class="vehicle_titles"></h4></div>
+  <label id="water_fV" class="water_veloc"></label>
+  <img id="wtr_img" class="vehicle_img" src="images/watercraft.png"><h2 id="water_title" class="vehicle_titles"></h2></div>
 
     <div id="air_select" class="col-xs-6 col-sm-3">
       <label id="air_init_speed" class="air_veloc">Speed:</label>
       <label id="air_ac_speed" class="air_veloc">Aceleration:</label>
       <label id="air_final_speed" class="air_veloc">Final speed:</label>
-      <img class="vehicle_img" src="images/air.png"><h4 id="air_title" class="vehicle_titles"></h4></div>
-    <div id="amphi_select" class="col-xs-6 col-sm-3"><img  class="vehicle_img" src="images/amphibious.png"><h4 id="amphi_title" class="vehicle_titles"></h4></div>
+      <img id="air_img" class="vehicle_img" src="images/air.jpg"><h2 id="air_title" class="vehicle_titles"></h2></div>
+    <div id="amphi_select" class="col-xs-6 col-sm-3">
+      <img id="amp_img" class="vehicle_img" src="images/amp.jpg"><h2 id="amphi_title" class="vehicle_titles"></h2></div>
   </div>
 
 </div>
 
-<div id="land_form">
+<div id="land_form" class="forms">
 <label>Vehicle Speed</label><input id="land_speed" type="text">
 <label>Radius (Front wheels)</label><input id="fw_rad" type="text">
 <label>Radius (Back Wheelies)</label><input id="bw_rad" type="text">
-<button id="land_start" type="submit" class="btn btn-default"><i class="glyphicon glyphicon-star"></i> Start</button>
+<button id="land_start" type="submit" class="start_buttons btn btn-default"><i class="glyphicon glyphicon-fire"></i> Start</button>
 </div>
 
-<div id="water_form">
-<label id="title_speed_wt">Vehicle Speed:</label><input id="water_speed" type="text">
-<label id="title_input_prop">Propellers:</label><input id="prop_quant" type="text">
-<button id="quant_prop_bt" type="submit" class="btn btn-default"><i class="glyphicon glyphicon-ok"></i> Ok</button>
-<button id='water_start_bt' class='btn btn-default' ><i class='glyphicon glyphicon-star'></i> Start</button>
+<div id="water_form" class="forms">
+<label id="title_speed_wt">Vehicle Speed</label><input id="water_speed" type="text">
+<label id="title_input_prop">Propellers</label><input id="prop_quant" type="text">
+<button id="quant_prop_bt" type="submit" class="start_buttons btn btn-default"><i class="glyphicon glyphicon-ok"></i> Ok</button>
+<button id='water_start_bt' class='btn btn-default' ><i class='glyphicon glyphicon-fire'></i> Start</button>
 </div>
 
-<div id="air_form">
-<label id="title_speed_air">Vehicle Speed:</label><input id="air_speed" type="text">
-<label id="title_pwr_air">Power: </label><input id="air_pw" type="text">
-<label id="title_turbo">Turbo button: </label><button id="turbo_button">OF</button>
-<button id="air_start" type="submit" class="btn btn-default"><i class="glyphicon glyphicon-star"></i> Start</button>
+<div id="air_form" class="forms">
+<label id="title_speed_air">Vehicle Speed</label><input id="air_speed" type="text">
+<label id="title_pwr_air">Power</label><input id="air_pw" type="text">
+<label id="title_turbo">Turbo button</label><button id="turbo_button">OF</button>
+<button id="air_start" type="submit" class="start_buttons btn btn-default"><i class="glyphicon glyphicon-fire"></i> Start</button>
 </div>
+
+<div id="amphi_form" class="forms">
+<label id="type_move_tittle">Type of movement</label><select id="amphi_move_select"><optgroup><option>Land</option><option>Water</option></optgroup></select>
+<button id='type_move_bt' class='start_buttons btn btn-default' ><i class='glyphicon glyphicon-ok'></i> OK</button>
+</div>
+
+<div id="canvas_box">
+<canvas id="the_canvas" width="300" height="100"></canvas>
+<img id="img_icon" src="images/car_icon.png"/>
+<div>
+
 
 <script src="jquery.js"></script>
 <script src="ex1.js"></script>
 <script src="effects.js"></script>
+<script src="canv_animation.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
