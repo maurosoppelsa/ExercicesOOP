@@ -326,7 +326,9 @@ getlndVelocityData();
 
 var url='images/road.png';
 
-getCanvas(url);
+var cspeed = get_canvas_speed(parseInt(speed));
+
+getCanvas(url,cspeed);
 
 });
 
@@ -344,7 +346,9 @@ getwtVelocityData();
 
 var url = 'images/sea.png';
 
-getCanvas(url);
+var cspeed = get_canvas_speed(parseInt(speed));
+
+getCanvas(url,cspeed);
 
 });
 
@@ -390,7 +394,11 @@ getAirVelocityData();
 
 var url = 'images/sky.png';
 
-getCanvas(url);
+var cspeed = get_canvas_speed(parseInt(speed));
+
+var cspeed = get_canvas_speed(parseInt(speed));
+
+getCanvas(url,cspeed);
 
 });
 
@@ -403,6 +411,8 @@ $("#turbo_button").click(function(){
 });
 
 $("#type_move_bt").click(function(){
+
+$("#canvas_box").hide();
 
 var type = $("#amphi_move_select").val();
 
@@ -504,7 +514,8 @@ function getAirVelocityData(){
 
 }
 
-function getCanvas(url){
+function getCanvas(url,cspeed){
+
   var img = new Image();
 
   // User Variables - customize these to change the image being scrolled, its
@@ -513,7 +524,7 @@ function getCanvas(url){
   img.src = url;
   var CanvasXSize = 800;
   var CanvasYSize = 200;
-  var speed = 30; //lower is faster
+  var speed = cspeed; //lower is faster
   var scale = 1.05;
   var y = -4.5; //vertical offset
 
@@ -562,6 +573,30 @@ function getCanvas(url){
       ctx.drawImage(img,x,y,imgW,imgH);
       //amount to move
       x += dx;
+  }
+
+}
+
+function get_canvas_speed (speed){
+
+if(speed>200){
+
+  return 5;
+  }
+
+else if(speed<200 && speed>100){
+
+  return 15;
+  }
+
+else if(speed<100){
+
+  return 25;
+  }
+
+else {
+
+  return 30;
   }
 
 }
